@@ -1,11 +1,13 @@
+import React from 'react';
+import { LoginForm } from '@/components/auth/LoginForm'; // Import the new LoginForm
 
-const Index = () => {
-
+function Index() {
   return (
-    <div className='overflow-hidden min-h-screen flex flex-col gap-40'>
-
+    <div className="relative min-h-screen flex items-center justify-center bg-gray-900 text-white overflow-hidden">
+      {/* Render the LoginForm component */}
+      <LoginForm />
     </div>
-  )
+  );
 }
 
-export default Index
+export default Index;
