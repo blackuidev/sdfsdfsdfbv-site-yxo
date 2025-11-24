@@ -1,36 +1,28 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import 'react-toastify/dist/ReactToastify.css';
+import { useState } from 'react';
+import { AppHeader } from './components/AppHeader';
+import Index from './pages/Index';
+import NotFound from './pages/NotFound';
+import './App.css';
 
+function App() {
+  const [count, setCount] = useState(0); // Retain existing state if any, or remove if not used.
+  const path = window.location.pathname; // Basic client-side routing based on path
 
-const queryClient = new QueryClient();
+  let content;
+  if (path === '/') {
+    content = <Index />;
+  } else {
+    content = <NotFound />;
+  }
 
-// =======================================================
-// ✅ Wrapper that hides Header on specific routes
-// =======================================================
-const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    return (
-        <>
-            {/* {!shouldHideHeader && <Header />} */}
-            {children}
-        </>
-    );
-};
-// =======================================================
-
-const App = () => (
-    <div className="font-primarylw">
-        <QueryClientProvider client={queryClient}>
-            <BrowserRouter>
-                <Layout>
-                    <Routes>
-                        <Route path="/" element={<Index />} />
-                    </Routes>
-                </Layout>
-            </BrowserRouter>
-        </QueryClientProvider>
-    </div >
-);
+  return (
+    <>
+      <AppHeader />
+      <main className="flex-grow">
+        {content}
+      </main>
+    </>
+  );
+}
 
 export default App;
